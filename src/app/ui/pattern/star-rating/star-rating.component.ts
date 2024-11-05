@@ -18,18 +18,21 @@ const starsArray: number[] = new Array(numStars).fill(1);
       {{ tooltipText }}
     </span>
     <div class="stars">
-      <span
-        *ngFor="let fill of stars"
-        class="star"
+      @for (fill of stars; track fill) {
+        <span
+          class="star"
         [ngClass]="{
           'star-half': fill === 0,
           'star-empty': fill === -1,
         }"
-        >★</span
-      >
-    </div>
-    <div class="rating-value" *ngIf="showRating">{{ rating }}</div>
-  `,
+          >★</span
+          >
+        }
+      </div>
+      @if (showRating) {
+        <div class="rating-value">{{ rating }}</div>
+      }
+    `,
   styleUrls: [
     'star-rating.component.scss',
     '../../component/tooltip/_tooltip.scss',
@@ -37,7 +40,7 @@ const starsArray: number[] = new Array(numStars).fill(1);
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.Emulated,
   standalone: true,
-  imports: [NgFor, NgClass, NgIf],
+  imports: [NgClass],
 })
 export class StarRatingComponent {
   range = range;

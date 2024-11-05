@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
@@ -22,13 +22,12 @@ import { SideDrawerComponent } from '../ui/component/side-drawer/side-drawer.com
     RouterLinkActive,
     RouterLink,
     FastSvgComponent,
-    NgFor,
     HamburgerButtonComponent,
     SearchBarComponent,
     FormsModule,
     DarkModeToggleComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class AppShellComponent {
   protected authService: AuthService = inject(AuthService);

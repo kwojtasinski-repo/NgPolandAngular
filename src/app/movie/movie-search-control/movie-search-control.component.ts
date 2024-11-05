@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -20,22 +20,25 @@ import { MovieModel } from '../movie-model';
       #searchInput
       (blur)="onTouched()"
       (input)="searchTerm$.next(searchInput.value)"
-    />
-    <div *ngIf="movies$ | async as movies" class="results">
-      <button
-        class="movie-result"
-        (click)="selectMovie(movie)"
-        *ngFor="let movie of movies"
-      >
-        <img
-          [src]="movie.poster_path | movieImage"
-          width="35"
-          [alt]="movie.title"
-        />
-        <span>{{ movie.title }}</span>
-      </button>
-    </div>
-  `,
+      />
+      @if (movies$ | async; as movies) {
+        <div class="results">
+          @for (movie of movies; track movie) {
+            <button
+              class="movie-result"
+              (click)="selectMovie(movie)"
+              >
+              <img
+                [src]="movie.poster_path | movieImage"
+                width="35"
+                [alt]="movie.title"
+                />
+                <span>{{ movie.title }}</span>
+              </button>
+            }
+          </div>
+        }
+    `,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -63,7 +66,7 @@ import { MovieModel } from '../movie-model';
     }
   `,
   standalone: true,
-  imports: [NgIf, NgFor, AsyncPipe, MovieImagePipe],
+  imports: [AsyncPipe, MovieImagePipe],
 })
 export class MovieSearchControlComponent
   implements ControlValueAccessor, AfterViewInit

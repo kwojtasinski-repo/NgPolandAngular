@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
@@ -10,16 +10,19 @@ import { MovieListComponent } from '../movie-list/movie-list.component';
 @Component({
   selector: 'movie-search-page',
   template: `
-    <movie-list
-      *ngIf="movies$ | async as movies; else loader"
-      [movies]="movies"
-    />
+    @if (movies$ | async; as movies) {
+      <movie-list
+        [movies]="movies"
+        />
+    } @else {
+      <div class="loader"></div>
+    }
     <ng-template #loader>
       <div class="loader"></div>
     </ng-template>
-  `,
+    `,
   standalone: true,
-  imports: [NgIf, MovieListComponent, AsyncPipe],
+  imports: [MovieListComponent, AsyncPipe],
 })
 export class MovieSearchPageComponent {
   private movieService = inject(MovieService);

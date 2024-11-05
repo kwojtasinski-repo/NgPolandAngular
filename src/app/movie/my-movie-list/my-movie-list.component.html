@@ -2,14 +2,15 @@
   <div class="form-group">
     <label for="search">Search</label>
     <app-movie-search-control id="search" formControlName="movie"></app-movie-search-control>
-    <span class="error" *ngIf="showError('movie')">
-      <ng-container *ngIf="myMovieForm.get('movie')?.hasError('required'); else: unique">
-        Entering a title is required
-      </ng-container>
-      <ng-template #unique>
-        You already added that movie, edit it instead
-      </ng-template>
-    </span>
+    @if (showError('movie')) {
+      <span class="error">
+        @if (myMovieForm.get('movie')?.hasError('required')) {
+          Entering a title is required
+        } @else {
+          You already added that movie, edit it instead
+        }
+      </span>
+    }
   </div>
   <div class="form-group">
     <label for="comment">Comment</label>
@@ -21,22 +22,23 @@
                     ctrl: myMovieForm.get('comment')
                   }
                 }"></ng-template>
-  </div>
-  <div class="button-group">
-    <button class="btn" type="button" (click)="reset()">Reset</button>
-    <button class="btn primary-button" type="submit">Save</button>
-  </div>
+</div>
+<div class="button-group">
+  <button class="btn" type="button" (click)="reset()">Reset</button>
+  <button class="btn primary-button" type="submit">Save</button>
+</div>
 </form>
 <h2>My Movies</h2>
 <div class="my-movies-list" [formGroup]="favoritesForm">
   <ng-container formArrayName="favorites">
-    <div class="movie-item" *ngFor="let movieCtrl of favorites.controls; let i = index;"
-      [formGroup]="$any(movieCtrl)">
-      <span class="movie-title">{{ movieCtrl.get('title')?.value }}</span>
-      <div class="form-group">
-        <textarea formControlName="comment"
-                  class="movie-comment"></textarea>
-        <ng-template [ngTemplateOutlet]="commentError"
+    @for (movieCtrl of favorites.controls; track movieCtrl; let i = $index) {
+      <div class="movie-item"
+        [formGroup]="$any(movieCtrl)">
+        <span class="movie-title">{{ movieCtrl.get('title')?.value }}</span>
+        <div class="form-group">
+          <textarea formControlName="comment"
+          class="movie-comment"></textarea>
+          <ng-template [ngTemplateOutlet]="commentError"
                      [ngTemplateOutletContext]="{
                       $implicit: {
                           showError: !movieCtrl.get('comment')?.valid,
@@ -50,17 +52,19 @@
         Delete
       </button>
     </div>
-  </ng-container>
+  }
+</ng-container>
 </div>
 
 <ng-template #commentError let-input>
-  <span class="error" *ngIf="input.showError">
-    <ng-container *ngIf="$any(input.ctrl).hasError('required'); else: minLength">
-      Entering a comment is required
-    </ng-container>
-    <ng-template #minLength>
-      Please enter the minimum amount of {{ $any(input.ctrl).errors.minlength?.requiredLength }}, right now
-      you've entered {{ $any(input.ctrl).errors.minlength?.actualLength }}
-    </ng-template>
-  </span>
+  @if (input.showError) {
+    <span class="error">
+      @if ($any(input.ctrl).hasError('required')) {
+        Entering a comment is required
+      } @else {
+        Please enter the minimum amount of {{ $any(input.ctrl).errors.minlength?.requiredLength }}, right now
+        you've entered {{ $any(input.ctrl).errors.minlength?.actualLength }}
+      }
+    </span>
+  }
 </ng-template>

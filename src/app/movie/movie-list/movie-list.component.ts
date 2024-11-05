@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FastSvgComponent } from '@push-based/ngx-fast-svg';
@@ -9,25 +9,25 @@ import { MovieCardComponent } from '../movie-card/movie-card.component';
 @Component({
   selector: 'movie-list',
   template: `
-    <ng-container *ngIf="movies.length > 0; else empty">
-      <movie-card
-        *ngFor="let movie of movies; trackBy: trackByMovieId; let i = index"
-        [index]="i"
-        [routerLink]="['/movie', movie.id]"
-        [loading]="favoritesLoading.has(movie.id)"
-        [favorite]="favoriteMovieIds.has(movie.id)"
-        (favoriteChange)="favoriteToggled.emit(movie)"
-        [movie]="movie"
-      />
-    </ng-container>
-
-    <ng-template #empty>
+    @if (movies.length > 0) {
+      @for (movie of movies; track trackByMovieId(i, movie); let i = $index) {
+        <movie-card
+          [index]="i"
+          [routerLink]="['/movie', movie.id]"
+          [loading]="favoritesLoading.has(movie.id)"
+          [favorite]="favoriteMovieIds.has(movie.id)"
+          (favoriteChange)="favoriteToggled.emit(movie)"
+          [movie]="movie"
+          />
+      }
+    } @else {
       <div class="no-movies">
         <fast-svg name="sad" size="50" />
         There are no movies to show
       </div>
-    </ng-template>
-  `,
+    }
+    
+    `,
   styles: `
     :host {
       display: grid;
@@ -39,7 +39,7 @@ import { MovieCardComponent } from '../movie-card/movie-card.component';
     }
   `,
   standalone: true,
-  imports: [NgIf, NgFor, MovieCardComponent, RouterLink, FastSvgComponent],
+  imports: [MovieCardComponent, RouterLink, FastSvgComponent],
 })
 export class MovieListComponent {
   @Input({ required: true }) movies!: TMDBMovieModel[];

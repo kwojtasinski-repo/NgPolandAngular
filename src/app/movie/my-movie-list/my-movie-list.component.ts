@@ -1,4 +1,4 @@
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import {
   FormArray,
@@ -25,11 +25,9 @@ import { MovieSearchControlComponent } from '../movie-search-control/movie-searc
     FormsModule,
     ReactiveFormsModule,
     MovieSearchControlComponent,
-    NgIf,
     NgTemplateOutlet,
-    NgFor,
-    FastSvgComponent,
-  ],
+    FastSvgComponent
+],
 })
 export class MyMovieListComponent implements OnInit {
   private movieService = inject(MovieService);
