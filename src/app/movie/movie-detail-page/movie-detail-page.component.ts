@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { startWith, switchMap } from 'rxjs';
 
@@ -124,10 +124,13 @@ import { MovieService } from '../movie.service';
   styleUrls: ['./movie-detail-page.component.scss'],
 })
 export class MovieDetailPageComponent {
-  constructor(
-    private route: ActivatedRoute,
-    private movieService: MovieService,
-  ) {}
+  private route = inject(ActivatedRoute);
+  private movieService = inject(MovieService);
+
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   movie$ = this.route.params.pipe(
     switchMap((params) =>

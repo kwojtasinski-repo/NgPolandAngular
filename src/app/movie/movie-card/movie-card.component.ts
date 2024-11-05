@@ -1,10 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  Output,
-} from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, inject } from '@angular/core';
 import { fromEvent } from 'rxjs';
 
 import { TMDBMovieModel } from '../../shared/model/movie.model';
@@ -75,6 +69,8 @@ import { TMDBMovieModel } from '../../shared/model/movie.model';
   `,
 })
 export class MovieCardComponent {
+  elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+
   @Input({ required: true }) movie!: TMDBMovieModel;
   @Input({ required: true }) index!: number;
   @Input() favorite = false;
@@ -82,7 +78,10 @@ export class MovieCardComponent {
 
   @Output() favoriteChange = new EventEmitter<boolean>();
 
-  constructor(public elementRef: ElementRef<HTMLElement>) {
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
     fromEvent(this.elementRef.nativeElement, 'mouseenter').subscribe(() => {
       this.elementRef.nativeElement.classList.add('movie-card--hover');
     });

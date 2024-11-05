@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
 
@@ -15,10 +15,13 @@ import { MovieService } from '../movie.service';
   `,
 })
 export class MovieSearchPageComponent {
-  constructor(
-    private movieService: MovieService,
-    private activatedRoute: ActivatedRoute,
-  ) {}
+  private movieService = inject(MovieService);
+  private activatedRoute = inject(ActivatedRoute);
+
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   movies$: Observable<TMDBMovieModel[]> = this.activatedRoute.params.pipe(
     switchMap((params) => this.movieService.searchMovies(params['query'])),

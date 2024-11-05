@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { exhaustMap, Observable, scan, startWith, Subject } from 'rxjs';
 
@@ -13,14 +13,17 @@ import { MovieService } from '../movie.service';
   `,
 })
 export class MovieListPageComponent {
+  private movieService = inject(MovieService);
+  private activatedRoute = inject(ActivatedRoute);
+
   paginate$ = new Subject<void>();
 
   movies: TMDBMovieModel[] = [];
 
-  constructor(
-    private movieService: MovieService,
-    private activatedRoute: ActivatedRoute,
-  ) {
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
     this.activatedRoute.params.subscribe((params) => {
       if (params.category) {
         this.paginate((page) =>

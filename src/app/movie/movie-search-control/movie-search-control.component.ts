@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { of, Subject, switchMap } from 'rxjs';
 
@@ -58,6 +58,8 @@ import { MovieModel } from '../movie-model';
 export class MovieSearchControlComponent
   implements ControlValueAccessor, AfterViewInit
 {
+  private movieService = inject(MovieService);
+
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
 
   readonly searchTerm$ = new Subject<string>();
@@ -73,7 +75,10 @@ export class MovieSearchControlComponent
 
   private movieCache!: MovieModel;
 
-  constructor(private movieService: MovieService) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngAfterViewInit(): void {
     if (this.movieCache) {

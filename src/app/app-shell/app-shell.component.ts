@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../core/auth.service';
@@ -11,12 +11,10 @@ import { TrackingService } from '../shared/tracking.service';
   styleUrls: ['./app-shell.component.scss'],
 })
 export class AppShellComponent {
-  constructor(
-    protected authService: AuthService,
-    private movieService: MovieService,
-    private router: Router,
-    private trackingService: TrackingService,
-  ) {}
+  protected authService: AuthService = inject(AuthService);
+  private movieService: MovieService = inject(MovieService);
+  private router: Router = inject(Router);
+  private trackingService: TrackingService = inject(TrackingService);
 
   genres$ = this.movieService.getGenres();
 

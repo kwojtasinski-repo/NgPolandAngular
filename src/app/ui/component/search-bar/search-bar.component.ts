@@ -1,15 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  Inject,
-  Input,
-  OnInit,
-  Output,
-  ViewChild,
-  ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, Output, ViewChild, ViewEncapsulation, inject } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { coerceObservable } from '@rx-angular/cdk/coercing';
 import { RxState } from '@rx-angular/state';
@@ -75,6 +65,14 @@ type UiActions = {
   ],
 })
 export class SearchBarComponent implements OnInit, ControlValueAccessor {
+  private state = inject<RxState<{
+    search: string;
+    open: boolean;
+}>>(RxState);
+  private actions = inject<RxActionFactory<UiActions>>(RxActionFactory);
+  private elementRef = inject<ElementRef>(ElementRef);
+  private document = inject<Document>(DOCUMENT);
+
   @ViewChild('searchInput') inputRef!: ElementRef<HTMLInputElement>;
   @ViewChild('form') formRef!: ElementRef<HTMLFormElement>;
 
@@ -130,12 +128,10 @@ export class SearchBarComponent implements OnInit, ControlValueAccessor {
 
   private readonly classList = this.elementRef.nativeElement.classList;
 
-  constructor(
-    private state: RxState<{ search: string; open: boolean }>,
-    private actions: RxActionFactory<UiActions>,
-    @Inject(ElementRef) private elementRef: ElementRef,
-    @Inject(DOCUMENT) private document: Document,
-  ) {
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
     this.state.set({ open: false });
   }
 

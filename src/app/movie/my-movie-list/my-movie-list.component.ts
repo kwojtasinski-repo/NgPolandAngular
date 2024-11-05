@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   FormArray,
   FormControl,
@@ -17,7 +17,12 @@ import { MovieService } from '../movie.service';
   styleUrls: ['./my-movie-list.component.scss'],
 })
 export class MyMovieListComponent implements OnInit {
-  constructor(private movieService: MovieService) {}
+  private movieService = inject(MovieService);
+
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   myMovieForm = new FormGroup({
     movie: new FormControl(null, [
