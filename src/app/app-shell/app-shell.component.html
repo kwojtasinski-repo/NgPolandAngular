@@ -1,6 +1,5 @@
 <ui-side-drawer
-  [opened]="sideDrawerOpen"
-  (openedChange)="sideDrawerOpen = $event"
+  [(opened)]="sideDrawerOpen"
   >
   <a class="navigation-header" href="/">
     <picture srcset="/assets/images/logo.svg" media="(min-width: 80em)">
@@ -121,7 +120,8 @@
           <ui-hamburger-button class="ui-toolbar--action" (click)="toggleSideDrawer()"></ui-hamburger-button>
           <div class="ui-toolbar--widget-container">
             <ui-search-bar
-              [(ngModel)]="searchValue"
+              [ngModel]="searchValue()"
+              (ngModelChange)="setSearchValue($event)"
             ></ui-search-bar>
             <ui-dark-mode-toggle></ui-dark-mode-toggle>
             <button
