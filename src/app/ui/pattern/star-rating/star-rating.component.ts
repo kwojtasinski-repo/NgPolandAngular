@@ -1,38 +1,39 @@
-import { CommonModule, NgClass, NgFor, NgIf } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   Input,
   NgModule,
+  signal,
   ViewEncapsulation,
 } from '@angular/core';
 
 const range = 10;
 const numStars = 5;
-const starsArray: number[] = new Array(numStars).fill(1);
 
 @Component({
   selector: 'ui-star-rating',
   template: `
     <span class="tooltip">
-      {{ tooltipText }}
+      {{ tooltipText() }}
     </span>
     <div class="stars">
-      @for (fill of stars; track fill) {
+      @for (fill of stars(); track fill) {
         <span
           class="star"
-        [ngClass]="{
-          'star-half': fill === 0,
-          'star-empty': fill === -1,
-        }"
+          [ngClass]="{
+            'star-half': fill === 0,
+            'star-empty': fill === -1,
+          }"
           >★</span
-          >
-        }
-      </div>
-      @if (showRating) {
-        <div class="rating-value">{{ rating }}</div>
+        >
       }
-    `,
+    </div>
+    @if (showRating) {
+      <div class="rating-value">{{ rating }}</div>
+    }
+  `,
   styleUrls: [
     'star-rating.component.scss',
     '../../component/tooltip/_tooltip.scss',
@@ -45,32 +46,28 @@ const starsArray: number[] = new Array(numStars).fill(1);
 export class StarRatingComponent {
   range = range;
   numStars = numStars;
-  stars: number[] = starsArray;
   @Input() showRating = false;
-  tooltipText = `0 average rating`;
+  tooltipText = computed(() => `${this._rating()} average rating`);
 
-  private _rating = 5;
-  @Input()
-  set rating(rating: number | undefined) {
-    this._rating = rating || 0;
+  private readonly _rating = signal(5);
 
-    this.setToolTopText(this.rating);
-
-    const scaledRating = this._rating / (this.range / this.numStars);
+  stars = computed(() => {
+    const scaledRating = this._rating() / (this.range / this.numStars);
     const full = Math.floor(scaledRating);
     const half = scaledRating % 1 > 0.5 ? 1 : 0;
     const empty = this.numStars - full - half;
-    this.stars = new Array(full)
+    return new Array(full)
       .fill(1)
       .concat(new Array(half).fill(0))
       .concat(new Array(empty).fill(-1));
+  });
+
+  @Input()
+  set rating(rating: number | undefined) {
+    this._rating.set(rating || 0);
   }
   get rating(): number {
-    return this._rating;
-  }
-
-  private setToolTopText(rating: number) {
-    this.tooltipText = `${rating} average rating`;
+    return this._rating();
   }
 }
 
