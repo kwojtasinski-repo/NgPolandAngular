@@ -1,20 +1,35 @@
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import {
   FormArray,
   FormControl,
   FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
+import { FastSvgComponent } from '@push-based/ngx-fast-svg';
 import { filter } from 'rxjs';
 
 import { TMDBMovieModel } from '../../shared/model/movie.model';
 import { MovieService } from '../movie.service';
+import { MovieSearchControlComponent } from '../movie-search-control/movie-search-control.component';
 
 @Component({
   selector: 'my-movie-list',
   templateUrl: './my-movie-list.component.html',
   styleUrls: ['./my-movie-list.component.scss'],
+  standalone: true,
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    MovieSearchControlComponent,
+    NgIf,
+    NgTemplateOutlet,
+    NgFor,
+    FastSvgComponent,
+  ],
 })
 export class MyMovieListComponent implements OnInit {
   private movieService = inject(MovieService);

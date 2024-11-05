@@ -5,8 +5,7 @@ import { RxLet } from '@rx-angular/template/let';
 import { SearchBarComponent } from './search-bar.component';
 
 @NgModule({
-  declarations: [SearchBarComponent],
-  imports: [FastSvgModule, RxLet],
+  imports: [FastSvgModule, RxLet, SearchBarComponent],
   exports: [SearchBarComponent],
 })
 export class SearchBarModule {}

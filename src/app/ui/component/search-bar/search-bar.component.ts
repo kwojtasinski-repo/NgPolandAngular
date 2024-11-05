@@ -11,10 +11,12 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FastSvgComponent } from '@push-based/ngx-fast-svg';
 import { coerceObservable } from '@rx-angular/cdk/coercing';
 import { RxState } from '@rx-angular/state';
 import { RxActionFactory } from '@rx-angular/state/actions';
 import { select } from '@rx-angular/state/selections';
+import { RxLet } from '@rx-angular/template/let';
 import {
   filter,
   fromEvent,
@@ -73,6 +75,8 @@ type UiActions = {
     RxState,
     RxActionFactory,
   ],
+  standalone: true,
+  imports: [FastSvgComponent, RxLet],
 })
 export class SearchBarComponent implements OnInit, ControlValueAccessor {
   private state = inject<

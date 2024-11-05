@@ -1,6 +1,10 @@
+import { NgFor, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { FastSvgComponent } from '@push-based/ngx-fast-svg';
 
 import { TMDBMovieModel } from '../../shared/model/movie.model';
+import { MovieCardComponent } from '../movie-card/movie-card.component';
 
 @Component({
   selector: 'movie-list',
@@ -34,6 +38,8 @@ import { TMDBMovieModel } from '../../shared/model/movie.model';
       position: relative;
     }
   `,
+  standalone: true,
+  imports: [NgIf, NgFor, MovieCardComponent, RouterLink, FastSvgComponent],
 })
 export class MovieListComponent {
   @Input({ required: true }) movies!: TMDBMovieModel[];

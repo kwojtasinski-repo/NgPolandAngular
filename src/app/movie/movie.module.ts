@@ -10,13 +10,15 @@ import { MovieImagePipe } from './movie-image.pipe';
 import { MovieListComponent } from './movie-list/movie-list.component';
 
 @NgModule({
-  declarations: [MovieCardComponent, MovieListComponent, MovieImagePipe],
   imports: [
     CommonModule,
     FastSvgModule,
     RouterModule,
     SharedModule,
     StarRatingModule,
+    MovieCardComponent,
+    MovieListComponent,
+    MovieImagePipe,
   ],
   exports: [MovieListComponent, MovieImagePipe],
 })

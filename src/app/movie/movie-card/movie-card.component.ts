@@ -1,3 +1,4 @@
+import { UpperCasePipe } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -9,6 +10,9 @@ import {
 import { fromEvent } from 'rxjs';
 
 import { TMDBMovieModel } from '../../shared/model/movie.model';
+import { TiltDirective } from '../../shared/tilt.directive';
+import { StarRatingComponent } from '../../ui/pattern/star-rating/star-rating.component';
+import { MovieImagePipe } from '../movie-image.pipe';
 
 @Component({
   selector: 'movie-card',
@@ -74,6 +78,8 @@ import { TMDBMovieModel } from '../../shared/model/movie.model';
       font-size: 2rem;
     }
   `,
+  standalone: true,
+  imports: [TiltDirective, StarRatingComponent, UpperCasePipe, MovieImagePipe],
 })
 export class MovieCardComponent {
   elementRef = inject<ElementRef<HTMLElement>>(ElementRef);

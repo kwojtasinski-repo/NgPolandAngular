@@ -1,8 +1,16 @@
-import { Directive, ElementRef, EventEmitter, NgZone, Output, inject } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  EventEmitter,
+  inject,
+  NgZone,
+  Output,
+} from '@angular/core';
 import { filter, fromEvent, map } from 'rxjs';
 
 @Directive({
   selector: '[elementVisible]',
+  standalone: true,
 })
 export class ElementVisibilityDirective {
   private elementRef = inject<ElementRef<HTMLElement>>(ElementRef);

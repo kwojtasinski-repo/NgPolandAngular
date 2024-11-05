@@ -1,3 +1,4 @@
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -9,6 +10,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { of, Subject, switchMap } from 'rxjs';
 
 import { MovieService } from '../movie.service';
+import { MovieImagePipe } from '../movie-image.pipe';
 import { MovieModel } from '../movie-model';
 
 @Component({
@@ -60,6 +62,8 @@ import { MovieModel } from '../movie-model';
       padding: 0.5rem 1rem;
     }
   `,
+  standalone: true,
+  imports: [NgIf, NgFor, AsyncPipe, MovieImagePipe],
 })
 export class MovieSearchControlComponent
   implements ControlValueAccessor, AfterViewInit

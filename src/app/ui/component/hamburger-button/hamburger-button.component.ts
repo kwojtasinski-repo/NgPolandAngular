@@ -13,5 +13,6 @@ import {
   host: {
     class: 'hamburger-button',
   },
+  standalone: true,
 })
 export class HamburgerButtonComponent {}

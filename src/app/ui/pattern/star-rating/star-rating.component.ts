@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgClass, NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -36,6 +36,8 @@ const starsArray: number[] = new Array(numStars).fill(1);
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.Emulated,
+  standalone: true,
+  imports: [NgFor, NgClass, NgIf],
 })
 export class StarRatingComponent {
   range = range;
@@ -70,8 +72,7 @@ export class StarRatingComponent {
 }
 
 @NgModule({
-  declarations: [StarRatingComponent],
-  imports: [CommonModule],
+  imports: [CommonModule, StarRatingComponent],
   exports: [StarRatingComponent],
 })
 export class StarRatingModule {}

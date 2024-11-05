@@ -8,7 +8,6 @@ import { MovieSearchControlModule } from '../movie-search-control/movie-search-c
 import { MyMovieListComponent } from './my-movie-list.component';
 
 @NgModule({
-  declarations: [MyMovieListComponent],
   imports: [
     RouterModule.forChild([
       {
@@ -20,6 +19,7 @@ import { MyMovieListComponent } from './my-movie-list.component';
     ReactiveFormsModule,
     FastSvgModule,
     MovieSearchControlModule,
+    MyMovieListComponent,
   ],
 })
 export class MyMovieListModule {}

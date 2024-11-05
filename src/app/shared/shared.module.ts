@@ -4,7 +4,7 @@ import { ElementVisibilityDirective } from './cdk/element-visibility/element-vis
 import { TiltDirective } from './tilt.directive';
 
 @NgModule({
-  declarations: [ElementVisibilityDirective, TiltDirective],
+  imports: [ElementVisibilityDirective, TiltDirective],
   exports: [ElementVisibilityDirective, TiltDirective],
 })
 export class SharedModule {}

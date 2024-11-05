@@ -12,6 +12,7 @@ import {
   styleUrls: ['./backdrop.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.Emulated,
+  standalone: true,
 })
 export class BackdropComponent {
   @HostBinding('class.opened')

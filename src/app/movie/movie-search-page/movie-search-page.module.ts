@@ -6,7 +6,6 @@ import { MovieModule } from '../movie.module';
 import { MovieSearchPageComponent } from './movie-search-page.component';
 
 @NgModule({
-  declarations: [MovieSearchPageComponent],
   imports: [
     RouterModule.forChild([
       {
@@ -16,6 +15,7 @@ import { MovieSearchPageComponent } from './movie-search-page.component';
     ]),
     MovieModule,
     CommonModule,
+    MovieSearchPageComponent,
   ],
 })
 export class MovieSearchPageModule {}

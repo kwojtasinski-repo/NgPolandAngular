@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { FastSvgComponent } from '@push-based/ngx-fast-svg';
 
 @Component({
   selector: 'not-found-page',
@@ -31,5 +33,7 @@ import { Component } from '@angular/core';
       margin: 3rem 1rem;
     }
   `,
+  standalone: true,
+  imports: [FastSvgComponent, RouterLink],
 })
 export class NotFoundPageComponent {}

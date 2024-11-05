@@ -5,8 +5,7 @@ import { MovieModule } from '../movie.module';
 import { MovieSearchControlComponent } from './movie-search-control.component';
 
 @NgModule({
-  declarations: [MovieSearchControlComponent],
-  imports: [CommonModule, MovieModule],
+  imports: [CommonModule, MovieModule, MovieSearchControlComponent],
   exports: [MovieSearchControlComponent],
 })
 export class MovieSearchControlModule {}

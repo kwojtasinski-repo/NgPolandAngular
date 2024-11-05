@@ -2,8 +2,10 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { exhaustMap, Observable, scan, startWith, Subject } from 'rxjs';
 
+import { ElementVisibilityDirective } from '../../shared/cdk/element-visibility/element-visibility.directive';
 import { TMDBMovieModel } from '../../shared/model/movie.model';
 import { MovieService } from '../movie.service';
+import { MovieListComponent } from '../movie-list/movie-list.component';
 
 @Component({
   selector: 'movie-list-page',
@@ -11,6 +13,8 @@ import { MovieService } from '../movie.service';
     <movie-list [movies]="movies" />
     <div (elementVisible)="paginate$.next()"></div>
   `,
+  standalone: true,
+  imports: [MovieListComponent, ElementVisibilityDirective],
 })
 export class MovieListPageComponent {
   private movieService = inject(MovieService);

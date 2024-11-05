@@ -1,8 +1,14 @@
+import { AsyncPipe, DatePipe, NgFor, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { FastSvgComponent } from '@push-based/ngx-fast-svg';
 import { startWith, switchMap } from 'rxjs';
 
+import { DetailGridComponent } from '../../ui/component/detail-grid/detail-grid.component';
+import { StarRatingComponent } from '../../ui/pattern/star-rating/star-rating.component';
 import { MovieService } from '../movie.service';
+import { MovieImagePipe } from '../movie-image.pipe';
+import { MovieListComponent } from '../movie-list/movie-list.component';
 
 @Component({
   selector: 'movie-detail-page',
@@ -122,6 +128,19 @@ import { MovieService } from '../movie.service';
     </ng-template>
   `,
   styleUrls: ['./movie-detail-page.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf,
+    DetailGridComponent,
+    StarRatingComponent,
+    NgFor,
+    RouterLink,
+    FastSvgComponent,
+    MovieListComponent,
+    MovieImagePipe,
+    AsyncPipe,
+    DatePipe,
+  ],
 })
 export class MovieDetailPageComponent {
   private route = inject(ActivatedRoute);

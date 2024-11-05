@@ -9,7 +9,6 @@ import { MovieModule } from '../movie.module';
 import { MovieDetailPageComponent } from './movie-detail-page.component';
 
 @NgModule({
-  declarations: [MovieDetailPageComponent],
   imports: [
     RouterModule.forChild([
       {
@@ -22,6 +21,7 @@ import { MovieDetailPageComponent } from './movie-detail-page.component';
     FastSvgModule,
     DetailGridModule,
     StarRatingModule,
+    MovieDetailPageComponent,
   ],
 })
 export class MovieDetailPageModule {}

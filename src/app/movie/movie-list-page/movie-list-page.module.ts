@@ -6,7 +6,6 @@ import { MovieModule } from '../movie.module';
 import { MovieListPageComponent } from './movie-list-page.component';
 
 @NgModule({
-  declarations: [MovieListPageComponent],
   imports: [
     RouterModule.forChild([
       {
@@ -16,6 +15,7 @@ import { MovieListPageComponent } from './movie-list-page.component';
     ]),
     MovieModule,
     SharedModule,
+    MovieListPageComponent,
   ],
 })
 export class MovieListPageModule {}

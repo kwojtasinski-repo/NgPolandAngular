@@ -7,6 +7,8 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
+import { BackdropComponent } from '../backdrop/backdrop.component';
+
 @Component({
   selector: 'ui-side-drawer',
   template: `
@@ -19,6 +21,8 @@ import {
   styleUrls: ['./side-drawer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.Emulated,
+  standalone: true,
+  imports: [BackdropComponent],
 })
 export class SideDrawerComponent {
   @Input() opened = false;

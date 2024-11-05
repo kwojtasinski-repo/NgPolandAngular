@@ -6,6 +6,7 @@ import { fromEvent, map, merge } from 'rxjs';
   host: {
     '[style.transform]': 'rotate',
   },
+  standalone: true,
 })
 export class TiltDirective {
   private elementRef = inject<ElementRef<HTMLElement>>(ElementRef);

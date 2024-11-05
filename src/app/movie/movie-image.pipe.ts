@@ -2,6 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'movieImage',
+  standalone: true,
 })
 export class MovieImagePipe implements PipeTransform {
   transform(value?: string, width = 780): string {

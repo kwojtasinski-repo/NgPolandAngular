@@ -11,7 +11,6 @@ import { SideDrawerModule } from '../ui/component/side-drawer/side-drawer.module
 import { AppShellComponent } from './app-shell.component';
 
 @NgModule({
-  declarations: [AppShellComponent],
   imports: [
     SideDrawerModule,
     RouterModule,
@@ -21,6 +20,7 @@ import { AppShellComponent } from './app-shell.component';
     FormsModule,
     DarkModeToggleModule,
     CommonModule,
+    AppShellComponent,
   ],
   exports: [AppShellComponent],
 })

@@ -18,11 +18,12 @@ import {
   styleUrls: ['./detail-grid.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.Emulated,
+  standalone: true,
 })
 export class DetailGridComponent {}
 
 @NgModule({
-  declarations: [DetailGridComponent],
+  imports: [DetailGridComponent],
   exports: [DetailGridComponent],
 })
 export class DetailGridModule {}
