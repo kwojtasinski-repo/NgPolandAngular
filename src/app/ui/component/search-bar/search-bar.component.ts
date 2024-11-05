@@ -1,5 +1,15 @@
 import { DOCUMENT } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, Output, ViewChild, ViewEncapsulation, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  inject,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { coerceObservable } from '@rx-angular/cdk/coercing';
 import { RxState } from '@rx-angular/state';
@@ -65,10 +75,12 @@ type UiActions = {
   ],
 })
 export class SearchBarComponent implements OnInit, ControlValueAccessor {
-  private state = inject<RxState<{
-    search: string;
-    open: boolean;
-}>>(RxState);
+  private state = inject<
+    RxState<{
+      search: string;
+      open: boolean;
+    }>
+  >(RxState);
   private actions = inject<RxActionFactory<UiActions>>(RxActionFactory);
   private elementRef = inject<ElementRef>(ElementRef);
   private document = inject<Document>(DOCUMENT);

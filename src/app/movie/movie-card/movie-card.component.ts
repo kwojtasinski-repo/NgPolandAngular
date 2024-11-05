@@ -1,4 +1,11 @@
-import { Component, ElementRef, EventEmitter, Input, Output, inject } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  inject,
+  Input,
+  Output,
+} from '@angular/core';
 import { fromEvent } from 'rxjs';
 
 import { TMDBMovieModel } from '../../shared/model/movie.model';
