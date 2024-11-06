@@ -26,8 +26,8 @@ import { MovieSearchControlComponent } from '../movie-search-control/movie-searc
     ReactiveFormsModule,
     MovieSearchControlComponent,
     NgTemplateOutlet,
-    FastSvgComponent
-],
+    FastSvgComponent,
+  ],
 })
 export class MyMovieListComponent implements OnInit {
   private movieService = inject(MovieService);

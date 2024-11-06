@@ -1,4 +1,3 @@
-
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FastSvgComponent } from '@push-based/ngx-fast-svg';
@@ -18,7 +17,7 @@ import { MovieCardComponent } from '../movie-card/movie-card.component';
           [favorite]="favoriteMovieIds.has(movie.id)"
           (favoriteChange)="favoriteToggled.emit(movie)"
           [movie]="movie"
-          />
+        />
       }
     } @else {
       <div class="no-movies">
@@ -26,8 +25,7 @@ import { MovieCardComponent } from '../movie-card/movie-card.component';
         There are no movies to show
       </div>
     }
-    
-    `,
+  `,
   styles: `
     :host {
       display: grid;

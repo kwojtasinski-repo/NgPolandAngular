@@ -11,16 +11,14 @@ import { MovieListComponent } from '../movie-list/movie-list.component';
   selector: 'movie-search-page',
   template: `
     @if (movies$ | async; as movies) {
-      <movie-list
-        [movies]="movies"
-        />
+      <movie-list [movies]="movies" />
     } @else {
       <div class="loader"></div>
     }
     <ng-template #loader>
       <div class="loader"></div>
     </ng-template>
-    `,
+  `,
   standalone: true,
   imports: [MovieListComponent, AsyncPipe],
 })
